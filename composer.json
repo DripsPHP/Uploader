@@ -1,0 +1,14 @@
+{
+    "name": "drips/uploader",
+    "description": "PHP-Uploader-System zum Speichern von Dateien aus $_FILES und PUT-Requests am Server",
+    "keywords": ["uploader", "put", "file"],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drips\\Uploader\\": "src"
+        }
+    }
+}
