@@ -306,31 +306,3 @@ class ImageUploader extends Uploader
         return false;
     }
 }
-
-class UploadFileNameNotFoundException extends Exception
-{
-}
-
-class UploadErrorException extends Exception
-{
-}
-
-class UploadOverrideNotAllowedException extends Exception
-{
-}
-
-class UploadFiletypeNotAllowedException extends Exception
-{
-}
-
-class UploadFileIsToBigException extends Exception
-{
-}
-
-class UploadFileImageIsToBigException extends Exception
-{
-}
-
-class UploadFileImageIsToSmallException extends Exception
-{
-}
