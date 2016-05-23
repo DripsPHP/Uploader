@@ -7,7 +7,6 @@
  */
 namespace Drips\Uploader;
 
-//use DripsPHP\Converter\FilesizeConverter;
 use Exception;
 
 /**
@@ -200,7 +199,7 @@ class ImageUploader extends Uploader
     }
 
     /**
-     * returns if upload via post-request was successful.
+     * returns if upload via post or put was successful.
      *
      * @param $name
      * @param $destination_dir
@@ -217,55 +216,11 @@ class ImageUploader extends Uploader
      */
     public function upload($name, $destination_dir, $override_existing = true)
     {
-        if (array_key_exists($name, $_FILES)) {
-            // multiple uploads?
-            if (is_array($_FILES[$name]['tmp_name'])) {
-                for ($i = 0; $i < count($_FILES[$name]['tmp_name']); $i++) {
-                    $this->files[] = array(
-                        'name' => $name,
-                        'filename' => $_FILES[$name]['name'][$i],
-                        'tmpname' => $_FILES[$name]['tmp_name'][$i],
-                        'type' => $_FILES[$name]['type'][$i],
-                        'error' => $_FILES[$name]['error'][$i],
-                        'size' => $_FILES[$name]['size'][$i],
-                        'filetype' => $this->getFiletype($_FILES[$name]['name'][$i]),
-                    );
-                }
-            } else {
-                $this->files[] = array(
-                    'name' => $name,
-                    'filename' => $_FILES[$name]['name'],
-                    'tmpname' => $_FILES[$name]['tmp_name'],
-                    'type' => $_FILES[$name]['type'],
-                    'error' => $_FILES[$name]['error'],
-                    'size' => $_FILES[$name]['size'],
-                    'filetype' => $this->getFiletype($_FILES[$name]['name']),
-                );
-            }
-
-            foreach ($this->files as $file) {
-                if ($this->checkFile($file)) {
-                    $path = $destination_dir.'/'.$file['filename'];
-                    if ($file['error'] != UPLOAD_ERR_OK) {
-                        throw new UploadErrorException($file['error'].','.$file['filename']);
-                    }
-                    if (is_file($path) && !$override_existing) {
-                        throw new UploadOverrideNotAllowedException($file['filename']);
-                    }
-                    if (move_uploaded_file($file['tmpname'], $path)) {
-                        return true;
-                    }
-                }
-            }
-        } else {
-            throw new UploadFileNameNotFoundException();
-        }
-
-        return false;
+        return parent::upload($name, $destination_dir, $override_existing);
     }
     
     /**
-     * returns if upload anc cropping via post-request was successful.
+     * returns if upload and cropping via post-request was successful.
      *
      * @param $name
      * @param $destination_dir

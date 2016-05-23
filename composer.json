@@ -3,8 +3,10 @@
     "description": "PHP-Uploader-System zum Speichern von Dateien aus $_FILES und PUT-Requests am Server",
     "keywords": ["uploader", "put", "file"],
     "license": "MIT",
-    "require": {
-        "php": ">=5.4"
+    "require-dev": {
+        "php": ">=5.4",
+        "drips/http": "dev-master",
+        "drips/debugger": "dev-master"
     },
     "autoload": {
         "psr-4": {
