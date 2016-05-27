@@ -219,45 +219,4 @@ class ImageUploader extends Uploader
         return parent::upload($name, $destination_dir, $override_existing);
     }
     
-    /**
-     * returns if upload and cropping via post-request was successful.
-     *
-     * @param $name
-     * @param $destination_dir
-     * @param bool $override_existing
-     * @param array $crop_rect
-     *
-     * @return bool
-     *
-     * @throws UploadErrorException
-     * @throws UploadFileImageIsToBigException
-     * @throws UploadFileIsToBigException
-     * @throws UploadFileNameNotFoundException
-     * @throws UploadFiletypeNotAllowedException
-     * @throws UploadOverrideNotAllowedException
-     * @throws ImagickException
-     */
-    public function uploadAndCrop($name, $destination_dir, $crop_rect, $override_existing = true)
-    {
-        if (array_key_exists($name, $_FILES)) {
-            // multiple uploads?
-            if (!is_array($_FILES[$name]['tmp_name'])) {
-                if($this->upload($name, $destination_dir, $override_existing)) {
-                    $imagePath = $destination_dir.'/'.$_FILES[$name]['name'];
-                    $startX = $crop_rect['x1'];
-                    $startY = $crop_rect['y1'];
-                    $width  = $crop_rect['x2']-$crop_rect['x1'];
-                    $height = $crop_rect['y2']-$crop_rect['y1'];
-                    $imagick = new \Imagick(realpath($imagePath));
-                    $imagick->cropImage($width, $height, $startX, $startY);
-                    $imagick->setImagePage(0, 0, 0, 0);
-                    if(file_put_contents($imagePath, $imagick)!==FALSE) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
 }

@@ -186,8 +186,6 @@ class Uploader {
                     );
                 }
 
-                var_dump($this->files);
-
                 foreach ($this->files as $file) {
                     if ($this->checkFile($file)) {
                         $path = $destination_dir.'/'.$file['filename'];
