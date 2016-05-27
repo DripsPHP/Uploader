@@ -5,11 +5,13 @@
     "license": "MIT",
     "require-dev": {
         "php": ">=5.4",
-        "drips/http": "dev-master"
+        "drips/http": "dev-master",
+	"minimum-stability": "dev"
     },
     "autoload": {
         "psr-4": {
             "Drips\\Uploader\\": "src"
         }
-    }
+    },
+	"minimum-stability": "dev"
 }
