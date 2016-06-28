@@ -180,43 +180,5 @@ class ImageUploader extends Uploader
 
         return true;
     }
-
-    /**
-     * returns filetype of a $filename.
-     *
-     * @param $filename
-     *
-     * @return string
-     */
-    public function getFiletype($filename)
-    {
-        $fileParts = explode('.', $filename);
-        if (count($fileParts) > 1) {
-            return array_pop($fileParts);
-        }
-
-        return '';
-    }
-
-    /**
-     * returns if upload via post or put was successful.
-     *
-     * @param $name
-     * @param $destination_dir
-     * @param bool $override_existing
-     *
-     * @return bool
-     *
-     * @throws UploadErrorException
-     * @throws UploadFileImageIsToBigException
-     * @throws UploadFileIsToBigException
-     * @throws UploadFileNameNotFoundException
-     * @throws UploadFiletypeNotAllowedException
-     * @throws UploadOverrideNotAllowedException
-     */
-    public function upload($name, $destination_dir, $override_existing = true)
-    {
-        return parent::upload($name, $destination_dir, $override_existing);
-    }
     
 }
